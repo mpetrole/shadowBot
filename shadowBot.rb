@@ -1,7 +1,6 @@
 require 'discordrb'
 
 bot = Discordrb::Commands::CommandBot.new token: 'MzA3MDI3NjkzMjg1OTMzMDY3.C-Mckg.SB_oT3Wfop1Fhru0XmpJSvfwXTY', client_id: 307027693285933067, prefix: '/'
-edge = false
 rolls = []
 user = nil
 
@@ -24,8 +23,6 @@ bot.command :roll do |event, num, arg|
     glitch = "critical"
   end
   event << "You rolled #{rolls}"
-  event << "Glitch!" if glitch == true
-  event << "Critical Glitch!" if glitch == "critical"
   event << "There were #{hits} hits and #{rolls.length - hits} misses"
   event << "Do /edge to use an edge to reroll the misses."
 end
@@ -36,8 +33,9 @@ bot.command :edge do |event|
     glitches = rolls.count(1)
     hits = rolls.count(5) + rolls.count(6)
     event << "Your new rolls are #{rolls}"
-    event << "There are now #{glitches} glitches"
-    event << "There are now #{hits} hits"
+    event << "Glitch!" if glitch == true
+    event << "Critical Glitch!" if glitch == "critical"
+    event << "There are now #{hits} hits and #{rolls.length - hits} misses"
     user = ""
   else
     event << "You aren't #{user}!"
