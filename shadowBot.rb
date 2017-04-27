@@ -24,18 +24,23 @@ bot.command :roll do |event, num, arg|
   end
   event << "You rolled #{rolls}"
   event << "There were #{hits} hits and #{rolls.length - hits} misses"
+  event << "Glitch!" if glitch == true
+  event << "Critical Glitch!" if glitch == "critical"
   event << "Do /edge to use an edge to reroll the misses."
 end
 
 bot.command :edge do |event|
   if event.user.name == user
     rolls.each_with_index {|val, index| rolls[index] = rand(1..6) if val < 5}
-    glitches = rolls.count(1)
+    glitch = rolls.count(1) > (rolls.length / 2)
     hits = rolls.count(5) + rolls.count(6)
+    if glitch == true && hits == 0
+      glitch = "critical"
+    end
     event << "Your new rolls are #{rolls}"
+    event << "There are now #{hits} hits and #{rolls.length - hits} misses"
     event << "Glitch!" if glitch == true
     event << "Critical Glitch!" if glitch == "critical"
-    event << "There are now #{hits} hits and #{rolls.length - hits} misses"
     user = ""
   else
     event << "You aren't #{user}!"
