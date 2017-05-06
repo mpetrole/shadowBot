@@ -11,14 +11,14 @@ bot.command :roll do |event, num, arg|
   for n in (1..num.to_i) 
     rolls << rng.rand(1..6)
   end
-  glitch = rolls.count(1) > (rolls.length / 2)
-  hits = rolls.count(5) + rolls.count(6)
   crits = rolls.count(6)
   if arg == "e"
-    for n in (0..crits)
+    for n in (1..crits)
       rolls << rng.rand(1..6)
     end
   end
+  glitch = rolls.count(1) > (rolls.length / 2)
+  hits = rolls.count(5) + rolls.count(6)
   if glitch == true && hits == 0
     glitch = "critical"
   end
