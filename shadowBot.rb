@@ -11,7 +11,7 @@ bot.command :roll do |event, num, arg|
     break
   end
   dice.clear
-  user = event.user.name
+  user = event.member.user_name
   rng = Random.new
   for n in (1..num.to_i) 
     dice << rng.rand(1..6)
@@ -36,7 +36,7 @@ bot.command :roll do |event, num, arg|
 end
 
 bot.command :edge do |event|
-  user = event.user.name
+  user = event.member.display_name
   if rolls.has_key?(user)
     dice = rolls[user]
     dice.each_with_index {|val, index| dice[index] = rand(1..6) if val < 5}
