@@ -1,6 +1,6 @@
 require 'discordrb'
 
-bot = Discordrb::Commands::CommandBot.new token: 'MzA3MDI3NjkzMjg1OTMzMDY3.C-Mckg.SB_oT3Wfop1Fhru0XmpJSvfwXTY', client_id: 307027693285933067, prefix: '/'
+bot = Discordrb::Commands::CommandBot.new token: '', client_id: , prefix: '/'
 dice = []
 rolls = {}
 player_list = {}
